@@ -28,7 +28,7 @@
 
 //         }
 
-//         tabellina(4);
+//         tabellina(2);
 
 
 
@@ -38,13 +38,13 @@
 
 // Scrivere una funzione che prenda in ingresso un array di nomi e me lo restituisca in ordine alfabetico
 
+// let nomi = ["Alberto" , "Pasquale" , "Gabriele" , "Morris"];
+// let nomi2 = riordina(nomi);
 
 // function riordina(nomi){
 //     return nomi.sort()
 // }
 
-// let nomi = ["Alberto" , "Pasquale" , "Gabriele" , "Morris"];
-// let nomi2 = riordina(nomi);
 // console.log(nomi2);
 
 
@@ -67,18 +67,17 @@
 
 // let arr2=['ciao', 'sono','Matteo'] ;
 
-// let arr3 = merge(arr1,arr2);
-// console.log(arr3);
 
-// function merge (arr1,arr2){  
+
+// function unione (arr1,arr2){  
 
 //     let arr3 = arr1.concat(arr2); 
 
-//     return console.log(arr3);
+//     console.log(arr3);
 
 // } 
 
-// merge(arr1,arr2)
+// unione(arr1,arr2)
 
 
 
@@ -94,7 +93,7 @@
 
 // function superior(num){
 //     let media = num.reduce((acc,num) => acc+num) / num.length;
-//     console.log(media);
+//     // console.log(media);
 //     let overMedia = num.filter((num) => num > media)
 //     console.log(overMedia);
 // }
@@ -112,8 +111,8 @@
 
 //     let pool = []
 //         for(i= 0; i < N; i++){
-//             let nunzio = Math.floor(Math.random()* (max-min +1)) + min 
-//             pool.push(nunzio)
+//             let numrandom = Math.floor(Math.random()* (max-min +1)) + min 
+//             pool.push(numrandom)
 //         }
 
 //         console.log(pool);
@@ -130,3 +129,136 @@
 
 
 
+// salvo in una variabile "dadi" un oggetto che conterrà: 
+// un array di oggetti 
+// una serie di metodi e istruzioni 
+
+const dadi = {
+    
+    // creo un array di oggetti "giocatori" che conterrà un nome e un array vuoto (punteggio)
+    
+    
+    giocatori : [
+        
+        {name: 'Pasquale', punteggio:[]},
+        {name: 'Lorenzo', punteggio:[]},
+        {name: 'Mattia', punteggio:[]},
+    ],
+    
+    //creo una funziona per sommare i punteggi generati nella prima funzione
+    
+    
+    setPunteggioFinale: function(){
+        
+        // devo ciclare su ogni giocatore
+        
+        this.giocatori.forEach((giocatore)=>{
+            
+            // sovrascrivo il valore punteggio trasformandolo da un array di numeri alla somma di quei numeri utilizzando il metodo .reduce()
+            
+            giocatore.punteggioFinale = giocatore.punteggio.reduce((acc,n)=> acc + n);
+            
+            
+        });
+        
+        console.log(this.giocatori);
+        
+    },
+    
+    
+    // creo una funzione per assegnare un punteggio casuale a ogni giocatore
+    
+    
+    setPunteggio: function(){
+        
+        // devo ciclare su ogni giocatore 
+        
+        
+        this.giocatori.forEach((giocatore)=>{
+            
+            // uso il ciclo for per pushare all'interno dall'array vuoto (punteggio) il punteggio di ogni lancio. 
+            
+            for(let i = 1; i <=6; i ++){
+                
+                //con il metodo push riempiamo l'array vuoto (punteggio) con il punteggio random.
+                
+                giocatore.punteggio.push( Math.floor(Math.random() * ( 6 - 1 + 1 ) + 1))
+            }
+        });
+        
+    },
+    
+    
+    
+    
+    
+    // metodo con .sort()
+    
+    // mi creo una funzione per settare il vincitore
+    
+    setVincitore: function(){
+        
+        // utilizzo il metodo .sort(a,b)=> b - a) per ordinare in ordine crescente il mio array
+        // nelle istruzioni specifico che il confronto va fatto sul punteggio finale degli elementi presi in considerazione (b.punteggioFinale - a.PunteggioFinale)
+        
+        console.log(this.giocatori.sort( (a,b)=> b.punteggioFinale - a.punteggioFinale))
+        
+        // mi creo una variabile col vincitore in posizione zero [0]
+        
+        
+        let vincitore = this.giocatori[0];
+        
+        // faccio un confronto tra il punteggioFinale del giocatore in posizione zero e quello del giocatore in posizione uno
+        
+        if(vincitore.punteggioFinale > this.giocatori[1].punteggioFinale){
+            
+            console.log(`Il giocatore ${vincitore.name} ha ottenuto un punteggio finale di ${vincitore.punteggioFinale} e ha vinto la partita!`);
+            
+            
+            
+        }else{
+            
+            console.log("La partita è terminata con un pareggio");
+            
+        }
+        
+        
+    }
+    
+    
+    
+};
+
+
+
+
+
+
+dadi.setVincitore();
+dadi.setPunteggio();
+dadi.setPunteggioFinale();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// console.log(dadi);
+//     let vincitore = this.giocatori[0];
+
+//     this.giocatori.forEach((giocatore)=>{
+
+//         if( giocatore.punteggioFinale > vincitore.punteggioFinale){
+
+//             vincitore = giocatore;
+//         }
+//     });
